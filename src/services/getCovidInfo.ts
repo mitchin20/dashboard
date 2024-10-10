@@ -36,8 +36,6 @@ export const getCovidInfo = async () => {
             }
         }
 
-        console.log("COVID data: ", response.data[0]);
-
         return response.data;
     } catch (error) {
         console.log("Fetch COVID data error: ", error);
