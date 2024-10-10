@@ -1,4 +1,3 @@
-import { Page } from "puppeteer";
 import { Request, Response } from "express";
 import { browserInstance } from "../lib/browserInstance";
 

@@ -20,7 +20,7 @@ export const getStateMetricsTimeseriesController = async (
         res.status(200).json({
             success: true,
             data: result.data,
-            length: result.data.length,
+            length: result.length,
             error: null,
             message: "State Metrics Timeseries Data",
         });

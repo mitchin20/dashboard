@@ -7,23 +7,27 @@ export const getStateMetricsTimeseries = async (state: string) => {
             `${process.env.STATE_HISTORICAL_API_URL}/${state}.timeseries.json?apiKey=${process.env.COVID_API_KEY}`
         );
 
-        console.log(
-            "response.data.metricsTimeseries.length: ",
-            response.data.metricsTimeseries.length
-        );
+        if (!response.data) {
+            return {
+                data: null,
+                length: 0,
+            };
+        }
 
-        const lastSixMonthsData = response.data.metricsTimeseries.filter(
-            ({ date }: { date: string }) => {
-                return (
-                    new Date(date) >=
-                    new Date(new Date().setMonth(new Date().getMonth() - 12))
-                );
-            }
-        );
+        // Clean up data
+        const cleanData = response.data.actualsTimeseries.map((item: any) => {
+            return {
+                date: item.date,
+                cases: item.cases,
+                deaths: item.deaths,
+                newCases: item.newCases,
+                newDeaths: item.newDeaths,
+            };
+        });
 
         return {
-            data: lastSixMonthsData,
-            length: lastSixMonthsData.length,
+            data: cleanData,
+            length: cleanData.length ?? 0,
         };
     } catch (error) {
         console.log("Fetch COVID data error: ", error);
