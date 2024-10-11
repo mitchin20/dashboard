@@ -4,7 +4,7 @@ import { getStateMetricsTimeseries } from "../services/getStateMetricsTimeseries
 export const getStateMetricsTimeseriesController = async (
     req: Request,
     res: Response
-) => {
+): Promise<void> => {
     try {
         const { state } = req.params;
         if (!state) {
@@ -14,6 +14,7 @@ export const getStateMetricsTimeseriesController = async (
                 error: "State parameter is required",
                 message: "Bad Request",
             });
+            return;
         }
 
         const pagination = Boolean(req.query.pagination as string) || false;
@@ -28,6 +29,7 @@ export const getStateMetricsTimeseriesController = async (
                 error: null,
                 message: "State Metrics Timeseries Data",
             });
+            return;
         }
 
         const page = parseInt(req.query.page as string) || 1;
@@ -40,6 +42,7 @@ export const getStateMetricsTimeseriesController = async (
                 error: "Invalid page or limit value",
                 message: "Bad Request",
             });
+            return;
         }
 
         // Calculate the pagination values
