@@ -7,7 +7,7 @@ import { getCache, setCache } from "../../config/localCache";
 
 const BUCKET_NAME = process.env.BUCKET_NAME;
 const RESUME_KEY = process.env.RESUME_KEY;
-const expireTime = 5 * 60;
+const expireTime = 48 * 60 * 60;
 
 export const getResume = async () => {
     try {
