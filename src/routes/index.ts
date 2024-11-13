@@ -4,6 +4,7 @@ import { getCovidInfoDataController } from "../controllers/getCovidInfoControlle
 import { getStateMetricsTimeseriesController } from "../controllers/getStateMetricsTimeseriesController";
 import { downloadResumeController } from "../controllers/downloadResumeController";
 import { contactEmailController } from "../controllers/contactEmailController";
+import { getNpmPackagesController } from "../controllers/getNpmPackagesController";
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.get("/download-resume", downloadResumeController);
 
 router.post("/bulk-upload", bulkUploadController);
 router.post("/contact-email", contactEmailController);
+router.post("/get-npm-packages", getNpmPackagesController);
 
 export default router;
