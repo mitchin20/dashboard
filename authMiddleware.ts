@@ -1,7 +1,7 @@
 require("dotenv").config();
 import { jwtVerify } from "jose";
 import { NextFunction, Request, Response } from "express";
-import { JWTExpired } from "jose/dist/types/util/errors";
+import { JWTExpired } from "jose/errors";
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 const permissionRoleList = ["BASIC", "ADMIN", "ADVANCE"];
