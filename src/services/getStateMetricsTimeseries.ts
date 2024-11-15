@@ -1,7 +1,7 @@
 require("dotenv").config();
 import axios from "axios";
-import { redisClient } from "../../config/redis";
-import { getCache, setCache, hasCacheKey } from "../../config/localCache";
+import { redisClient } from "../config/redis";
+import { getCache, setCache, hasCacheKey } from "../config/localCache";
 
 export const getStateMetricsTimeseries = async (state: string) => {
     try {

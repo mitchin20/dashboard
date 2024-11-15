@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getStateMetricsTimeseries = void 0;
 require("dotenv").config();
 const axios_1 = __importDefault(require("axios"));
-const redis_1 = require("../../config/redis");
-const localCache_1 = require("../../config/localCache");
+const redis_1 = require("../config/redis");
+const localCache_1 = require("../config/localCache");
 const getStateMetricsTimeseries = (state) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log("has local key? ", (0, localCache_1.hasCacheKey)(`stateActualsTimeseries${state}`));

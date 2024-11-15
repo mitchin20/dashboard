@@ -1,3 +1,4 @@
+require("dotenv").config();
 import { Redis } from "@upstash/redis";
 
 export const redisClient = new Redis({

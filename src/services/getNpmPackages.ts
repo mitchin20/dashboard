@@ -1,6 +1,6 @@
 require("dotenv").config();
 import axios from "axios";
-import { getCache, setCache, hasCacheKey } from "../../config/localCache";
+import { getCache, setCache, hasCacheKey } from "../config/localCache";
 
 const NPM_API = "https://api.npms.io/v2/package/mget";
 const packageNames = ["react"];

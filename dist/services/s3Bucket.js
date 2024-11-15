@@ -14,7 +14,7 @@ require("dotenv").config();
 const client_s3_1 = require("@aws-sdk/client-s3");
 const awsS3_1 = require("../aws/awsS3");
 const s3_request_presigner_1 = require("@aws-sdk/s3-request-presigner");
-const localCache_1 = require("../../config/localCache");
+const localCache_1 = require("../config/localCache");
 const BUCKET_NAME = process.env.BUCKET_NAME;
 const RESUME_KEY = process.env.RESUME_KEY;
 const expireTime = 48 * 60 * 60;
