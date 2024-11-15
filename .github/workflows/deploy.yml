@@ -46,7 +46,12 @@ jobs:
                       sudo npm cache clean --force
                       sudo npm install
 
+                      echo "Start build process..."
                       sudo npm run build
+                      echo "Build completed"
+
+                      echo "Listing contents of dist directory..."
+                      ls -al dist
 
                       if [ ! -f "dist/server.js" ]; then
                         echo "Error: Compiled entry point (dist/server.js) not found."
