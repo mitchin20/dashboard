@@ -10,29 +10,30 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            # Step 1: Check out the repository code
             - name: Checkout Repository
               uses: actions/checkout@v3
 
-            - name: Install SSH Key
-              uses: webfactory/ssh-agent@v0.6.0
-              with:
-                  ssh-private-key: ${{ secrets.EC2_KEY }}
-
-            - name: Archive Files
-              run: tar -czf server.tar.gz .
-
-            - name: Copy Archive to EC2
+            # Step 2: Create PEM file from Secret
+            - name: Create PEM file
               run: |
-                  scp -o StrictHostKeyChecking=no server.tar.gz ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu
+                  echo "${{ secrets.EC2_KEY }}" > ec2-key.pem
+                  chmod 400 ec2-key.pem
 
-            - name: Extract Files on EC2
+            # Step 3: Deploy to EC2 using SSH
+            - name: Deploy to EC2
               run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "mkdir -p /home/ubuntu/server && tar -xzf /home/ubuntu/server.tar.gz -C /home/ubuntu/server"
-
-            - name: Install Dependencies on EC2
-              run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /home/ubuntu/server && npm install"
-
-            - name: Start Application on EC2
-              run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /home/ubuntu/server && npm run start server/src/server.ts"
+                  ssh -o StrictHostKeyChecking=no -i ec2-key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+                      if [ ! -d "/var/www/dashboard-server" ]; then
+                        git clone https://github.com/mitchin20/dashboard-server.git /var/www/dashboard-server
+                      else
+                        cd /var/www/dashboard-server
+                        git pull origin main
+                        fi
+                      
+                      cd /var/www/dashboard-server
+                      
+                      npm install
+                      
+                      pm2 restart app.js || pm2 start app.js
+                  EOF
