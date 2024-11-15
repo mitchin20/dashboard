@@ -20,7 +20,7 @@ jobs:
 
             - name: Copy Files to EC2
               run: |
-                  scp -o StrictHostKeyChecking=no -r . ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/server
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'mkdir -p /home/ubuntu/server' && scp -o StrictHostKeyChecking=no -r . ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/server
 
             - name: Install Dependencies on EC2
               run: |
