@@ -25,15 +25,20 @@ jobs:
               run: |
                   ssh -o StrictHostKeyChecking=no -i ec2-key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
                       if [ ! -d "/var/www/dashboard-server" ]; then
-                        git clone https://github.com/mitchin20/dashboard-server.git /var/www/dashboard-server
+                        sudo mkdir -p /var/www/dashboard-server
+                        sudo chown -R $USER:$USER /var/www/dashboard-server
+                      fi
+
+                      if [ ! -d "/var/www/dashboard-server/.git" ]; then
+                        sudo git clone https://github.com/mitchin20/dashboard-server.git /var/www/dashboard-server
                       else
                         cd /var/www/dashboard-server
-                        git pull origin main
-                        fi
-                      
+                        sudo git pull origin main
+                      fi
+
                       cd /var/www/dashboard-server
                       
-                      npm install
+                      sudo npm install
                       
-                      pm2 restart app.js || pm2 start app.js
+                      sudo pm2 restart server.ts || sudo pm2 start server.ts
                   EOF
