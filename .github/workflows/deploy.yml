@@ -18,9 +18,9 @@ jobs:
               with:
                   ssh-private-key: ${{ secrets.EC2_KEY }}
 
-            - name: Create Server Directory on EC2
+            - name: Create Project Directory on EC2
               run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "mkdir -p /home/ubuntu/server"
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'mkdir -p /home/ubuntu/server'
 
             - name: Copy Files to EC2
               run: |
@@ -30,6 +30,6 @@ jobs:
               run: |
                   ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /home/ubuntu/server && npm install"
 
-            - name: Start Application on EC2
+            - name: Start Application on EC2 using PM2
               run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /home/ubuntu/server && npm run start server/src/server.ts"
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /home/ubuntu/server && pm2 start server/src/server.ts && pm2 save"
