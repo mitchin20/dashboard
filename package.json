@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "build": "tsc",
+        "build": "rmdir /s /q dist && tsc",
         "start": "ts-node src/server.ts",
         "dev": "nodemon src/server.ts",
         "serve": "npm run build && pm2 start dist/server.js --name server",
