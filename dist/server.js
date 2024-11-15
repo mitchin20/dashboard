@@ -24,14 +24,18 @@ const routes_1 = __importDefault(require("./routes"));
 // private routes
 // public routes
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 3001;
-const allowedOrigins = ["http://localhost:3000"];
+const PORT = process.env.PORT || 80;
+const allowedOrigins = [
+    "http://localhost:3000",
+    "http://ec2-204-236-204-200.compute-1.amazonaws.com",
+];
 app.use(express_1.default.json());
 app.use((0, helmet_1.default)());
 app.use(rateLimit_1.default);
 app.use((0, morgan_1.default)(":method :url :status :res[content-length] - :response-time ms"));
 app.use((0, cors_1.default)({
     origin: allowedOrigins,
+    // origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }));
@@ -53,7 +57,7 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send("Something broke!");
 });
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on port ${PORT}`);
 });
 const shutDownDbConnection = () => {

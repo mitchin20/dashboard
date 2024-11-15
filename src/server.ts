@@ -12,8 +12,11 @@ import routes from "./routes";
 // public routes
 
 const app = express();
-const PORT = process.env.PORT || 3001;
-const allowedOrigins = ["http://localhost:3000"];
+const PORT: any = process.env.PORT || 80;
+const allowedOrigins = [
+    "http://localhost:3000",
+    "http://ec2-204-236-204-200.compute-1.amazonaws.com",
+];
 
 app.use(express.json());
 app.use(helmet());
@@ -26,6 +29,7 @@ app.use(
 app.use(
     cors({
         origin: allowedOrigins,
+        // origin: "*",
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
     })
@@ -55,7 +59,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).send("Something broke!");
 });
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
