@@ -39,6 +39,8 @@ jobs:
                       cd /var/www/dashboard-server
                       
                       sudo npm install
+
+                      sudo npx tsc
                       
-                      sudo pm2 restart server.ts || sudo pm2 start server.ts
+                      sudo pm2 restart dist/server.ts || sudo pm2 start dist/server.ts
                   EOF
