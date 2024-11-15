@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { browserInstance } from "../lib/browserInstance";
 
 interface NpmDataProps {
     name: string;
