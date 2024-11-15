@@ -37,6 +37,10 @@ jobs:
                       fi
 
                       cd /var/www/dashboard-server
+
+                      if [ -d "dist" ]; then
+                        sudo rm -rf dist
+                      fi
                       
                       sudo rm -rf node_modules package-lock.json
                       sudo npm cache clean --force
