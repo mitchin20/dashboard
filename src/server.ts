@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ path: "/var/www/dashboard-server/.env" });
 import limiter from "./lib/rateLimit";
 import helmet from "helmet";
 import morgan from "morgan";
