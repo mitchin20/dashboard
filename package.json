@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "build": "rmdir /s /q dist && tsc",
+        "build": "node -e \"if (process.platform === 'win32') require('child_process').execSync('rmdir /s /q dist'); else require('child_process').execSync('rm -rf dist');\" && tsc",
         "start": "ts-node src/server.ts",
         "dev": "nodemon src/server.ts",
         "serve": "npm run build && pm2 start dist/server.js --name server",
