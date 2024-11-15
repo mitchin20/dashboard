@@ -53,10 +53,10 @@ jobs:
                       echo "Listing contents of dist directory..."
                       ls -al dist
 
-                      if [ ! -f "dist/server.js" ]; then
-                        echo "Error: Compiled entry point (dist/server.js) not found."
+                      if [ ! -f "dist/src/server.js" ]; then
+                        echo "Error: Compiled entry point (dist/src/server.js) not found."
                         exit 1
                       fi
                       
-                      sudo pm2 restart dist/server.js || sudo pm2 start dist/server.js
+                      sudo pm2 restart dist/src/server.js || sudo pm2 start dist/src/server.js
                   EOF
