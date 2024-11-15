@@ -38,9 +38,16 @@ jobs:
 
                       cd /var/www/dashboard-server
                       
+                      sudo rm -rf node_modules package-lock.json
+                      sudo npm cache clean --force
                       sudo npm install
 
-                      sudo npx tsc
+                      sudo npm run build
+
+                      if [ ! -f "dist/server.js" ]; then
+                        echo "Error: Compiled entry point (dist/server.js) not found."
+                        exit 1
+                      fi
                       
-                      sudo pm2 restart dist/server.ts || sudo pm2 start dist/server.ts
+                      sudo pm2 restart dist/server.js || sudo pm2 start dist/server.js
                   EOF
