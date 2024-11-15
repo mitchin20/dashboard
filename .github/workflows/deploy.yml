@@ -18,18 +18,21 @@ jobs:
               with:
                   ssh-private-key: ${{ secrets.EC2_KEY }}
 
-            - name: Create Project Directory on EC2
-              run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'mkdir -p /home/ubuntu/server'
+            - name: Archive Files
+              run: tar -czf server.tar.gz .
 
-            - name: Copy Files to EC2
+            - name: Copy Archive to EC2
               run: |
-                  scp -o StrictHostKeyChecking=no -r . ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/server
+                  scp -o StrictHostKeyChecking=no server.tar.gz ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu
+
+            - name: Extract Files on EC2
+              run: |
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "mkdir -p /home/ubuntu/server && tar -xzf /home/ubuntu/server.tar.gz -C /home/ubuntu/server"
 
             - name: Install Dependencies on EC2
               run: |
                   ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /home/ubuntu/server && npm install"
 
-            - name: Start Application on EC2 using PM2
+            - name: Start Application on EC2
               run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /home/ubuntu/server && pm2 start server/src/server.ts && pm2 save"
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /home/ubuntu/server && npm run start server/src/server.ts"
