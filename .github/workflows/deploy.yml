@@ -11,16 +11,20 @@ jobs:
 
         steps:
             - name: Checkout Repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: Install SSH Key
-              uses: webfactory/ssh-agent@v0.5.3
+              uses: webfactory/ssh-agent@v0.6.0
               with:
                   ssh-private-key: ${{ secrets.EC2_KEY }}
 
+            - name: Create Server Directory on EC2
+              run: |
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "mkdir -p /home/ubuntu/server"
+
             - name: Copy Files to EC2
               run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'mkdir -p /home/ubuntu/server' && scp -o StrictHostKeyChecking=no -r . ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/server
+                  scp -o StrictHostKeyChecking=no -r . ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/server
 
             - name: Install Dependencies on EC2
               run: |
