@@ -7,7 +7,7 @@ services:
         ports:
             - "6379:6379"
         volumes:
-            - redis_data:/data
+            - ./redis.conf:/usr/local/etc/redis/redis.conf
         networks:
             - redis_network
         restart: unless-stopped
