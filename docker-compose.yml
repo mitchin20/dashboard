@@ -1,5 +1,6 @@
 version: "3.8"
 services:
+    # Redis Service
     redis:
         image: redis:latest
         container_name: api_redis_server
@@ -11,8 +12,29 @@ services:
             - redis_network
         restart: unless-stopped
 
+    # Node.js Server Services
+    server:
+        container_name: api_node_server
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        environment:
+            - PORT=8080
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+        networks:
+            - app_network
+        volumes:
+            - .:/usr/src/app
+        depends_on:
+            - redis
+        restart: unless-stopped
+
 volumes:
     redis_data:
 
 networks:
     redis_network:
+    app_network:
