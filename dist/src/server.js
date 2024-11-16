@@ -26,6 +26,10 @@ const routes_1 = __importDefault(require("./routes"));
 console.log("Using PORT: ", process.env.PORT);
 const app = (0, express_1.default)();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
+if (PORT === 80) {
+    console.error("Error: Attempt to bind to port 80 detected, terminating server.");
+    process.exit(1);
+}
 const allowedOrigins = [
     "http://localhost:3000",
     "http://ec2-34-229-201-159.compute-1.amazonaws.com/",
