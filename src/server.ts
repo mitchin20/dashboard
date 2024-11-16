@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "/var/www/dashboard-server/.env" });
+require("dotenv").config();
 import limiter from "./lib/rateLimit";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -12,7 +12,7 @@ import routes from "./routes";
 // public routes
 
 const app = express();
-const PORT: any = process.env.PORT || 80;
+const PORT: any = process.env.PORT || 8080;
 const allowedOrigins = [
     "http://localhost:3000",
     "http://ec2-204-236-204-200.compute-1.amazonaws.com",
