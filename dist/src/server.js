@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("dotenv").config({ path: "/var/www/dashboard-server/.env" });
+require("dotenv").config();
 const rateLimit_1 = __importDefault(require("./lib/rateLimit"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
@@ -24,7 +24,7 @@ const routes_1 = __importDefault(require("./routes"));
 // private routes
 // public routes
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8080;
 const allowedOrigins = [
     "http://localhost:3000",
     "http://ec2-204-236-204-200.compute-1.amazonaws.com",
