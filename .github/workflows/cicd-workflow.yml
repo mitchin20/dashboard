@@ -27,6 +27,7 @@ jobs:
                   scp -o StrictHostKeyChecking=no -r ./* ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/server/dashboard-server
 
             # Step 3: SSH into EC2 and Deploy
+            # Update the latest code from the repository
             # Check if any relevant files have changed
             - name: SSH into EC2 and Deploy
               run: |
@@ -34,10 +35,14 @@ jobs:
                     cd /home/${{ secrets.EC2_USER }}/server/dashboard-server
                     git pull origin main
 
-                    if git diff --name-only HEAD^ HEAD | grep -E "Dockerfile|docker-compose.yml|package.json|.dockerignore|.gitignore|tsconfig.json|cicd-workflow.yml"; then
+                    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
+                    if echo "$CHANGED_FILES" | grep -E "Dockerfile|docker-compose.yml|package.json|.dockerignore|.gitignore|tsconfig.json|cicd-workflow.yml"; then
                       echo "Changes detected in Docker-related files, rebuilding image..."
+                      docker-compose down
                       docker-compose build
+                      docker-compose up -d
+                    else
+                      echo "No changes detected in Docker-related files, starting services without rebuild."
+                      docker-compose up -d --no-build
                     fi
-
-                    docker-compose up -d --no-build
                   EOF
