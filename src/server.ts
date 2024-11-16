@@ -14,10 +14,10 @@ import routes from "./routes";
 console.log("Using PORT: ", process.env.PORT);
 
 const app = express();
-const PORT: any = process.env.PORT || 8080;
+const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 const allowedOrigins = [
     "http://localhost:3000",
-    "http://ec2-204-236-204-200.compute-1.amazonaws.com",
+    "http://ec2-34-229-201-159.compute-1.amazonaws.com/",
 ];
 
 app.use(express.json());

@@ -25,10 +25,10 @@ const routes_1 = __importDefault(require("./routes"));
 // public routes
 console.log("Using PORT: ", process.env.PORT);
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 const allowedOrigins = [
     "http://localhost:3000",
-    "http://ec2-204-236-204-200.compute-1.amazonaws.com",
+    "http://ec2-34-229-201-159.compute-1.amazonaws.com/",
 ];
 app.use(express_1.default.json());
 app.use((0, helmet_1.default)());
