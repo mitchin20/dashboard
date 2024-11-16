@@ -11,14 +11,11 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Install dependencies for production
-RUN npm ci --only=production
-
 # Build the TypeScript files
 RUN npm run build
 
 # Remove dev dependencies after building the code to reduce image size
-RUN npm install --omit=dev
+RUN npm prune --production
 
 # Add a new user and switch to that user (for security purposes)
 RUN adduser --disabled-password appuser
