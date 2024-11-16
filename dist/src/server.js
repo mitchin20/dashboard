@@ -23,6 +23,7 @@ const routes_1 = __importDefault(require("./routes"));
 // import { authMiddleware } from "./authMiddleware";
 // private routes
 // public routes
+console.log("Using PORT: ", process.env.PORT);
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 8080;
 const allowedOrigins = [

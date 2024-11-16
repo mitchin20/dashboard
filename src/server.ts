@@ -11,6 +11,8 @@ import routes from "./routes";
 
 // public routes
 
+console.log("Using PORT: ", process.env.PORT);
+
 const app = express();
 const PORT: any = process.env.PORT || 8080;
 const allowedOrigins = [
