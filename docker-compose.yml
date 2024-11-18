@@ -8,8 +8,9 @@ services:
             - "6379:6379"
         volumes:
             - ./redis.conf:/usr/local/etc/redis/redis.conf
+            - redis_data:/data
         networks:
-            - redis_network
+            - app_network
         restart: unless-stopped
 
     # Node.js Server Services
@@ -36,5 +37,4 @@ volumes:
     redis_data:
 
 networks:
-    redis_network:
     app_network:

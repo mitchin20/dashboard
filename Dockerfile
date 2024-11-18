@@ -1,10 +1,10 @@
-# Start from the official Node.js image
-FROM node:20
+# Stage 1: Build the application
+FROM node:20 AS builder
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy the package files and install all dependencies
+# Copy the package files and install dependencies
 COPY package*.json ./
 RUN npm install
 
@@ -14,8 +14,16 @@ COPY . .
 # Build the TypeScript files
 RUN npm run build
 
-# Remove dev dependencies after building the code to reduce image size
-RUN npm prune --production
+# Stage 2: Create the production image
+FROM node:20-slim
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy only the necessary files from the builder stage
+COPY --from=builder /usr/src/app/package*.json ./
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/dist ./dist
 
 # Add a new user and switch to that user (for security purposes)
 RUN adduser --disabled-password appuser
