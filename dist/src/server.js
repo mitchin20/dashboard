@@ -33,6 +33,8 @@ if (PORT === 80) {
 const allowedOrigins = [
     "http://localhost:3000",
     "http://ec2-34-229-201-159.compute-1.amazonaws.com/",
+    "https://dashboard-client-sigma-ecru.vercel.app/",
+    "https://dashboard-client-mbnb2prdu-giangs-projects-52c6f04e.vercel.app/",
 ];
 app.use(express_1.default.json());
 app.use((0, helmet_1.default)());
