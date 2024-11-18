@@ -11,8 +11,6 @@ import routes from "./routes";
 
 // public routes
 
-console.log("Using PORT: ", process.env.PORT);
-
 const app = express();
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
@@ -25,9 +23,9 @@ if (PORT === 80) {
 
 const allowedOrigins = [
     "http://localhost:3000",
-    "http://ec2-34-229-201-159.compute-1.amazonaws.com/",
-    "https://dashboard-client-sigma-ecru.vercel.app/",
-    "https://dashboard-client-mbnb2prdu-giangs-projects-52c6f04e.vercel.app/",
+    "http://ec2-34-229-201-159.compute-1.amazonaws.com",
+    "https://dashboard-client-sigma-ecru.vercel.app",
+    "https://dashboard-client-mbnb2prdu-giangs-projects-52c6f04e.vercel.app",
 ];
 
 app.use(express.json());
@@ -38,7 +36,8 @@ app.use(
     morgan(":method :url :status :res[content-length] - :response-time ms")
 );
 
-app.use(
+app.options(
+    "*",
     cors({
         origin: allowedOrigins,
         // origin: "*",
