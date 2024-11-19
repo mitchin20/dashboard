@@ -7,9 +7,6 @@ import cors from "cors";
 import { pool } from "./db/database";
 import routes from "./routes";
 // import { authMiddleware } from "./authMiddleware";
-// private routes
-
-// public routes
 
 const app = express();
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
@@ -36,13 +33,18 @@ app.use(
     morgan(":method :url :status :res[content-length] - :response-time ms")
 );
 
-app.options(
-    "*",
+app.use(
     cors({
-        origin: allowedOrigins,
-        // origin: "*",
-        methods: ["GET", "POST", "PUT", "DELETE"],
+        origin: (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
+        // credentials: true, // Allow cookies if needed
     })
 );
 
