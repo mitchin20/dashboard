@@ -3,6 +3,8 @@ import axios from "axios";
 import { redisClient } from "../config/redis";
 import { getCache, setCache, hasCacheKey } from "../config/localCache";
 
+const ttl = 300;
+
 export const getCountyMetric = async (countyFips: string) => {
     const API_URL = `${process.env.COUNTY_METRIC_API_URL?.replace(
         "{fips}",
@@ -10,6 +12,31 @@ export const getCountyMetric = async (countyFips: string) => {
     )}?apiKey=${process.env.COVID_API_KEY}`;
 
     try {
+        // Check for local cache data first
+        const localCacheData = getCache(`county-covid-data-${countyFips}`);
+        if (localCacheData) {
+            return {
+                data: localCacheData,
+                length: localCacheData.length,
+            };
+        }
+
+        // If no local cache data, then check for redis cache
+        const cachedData: string | null = await redisClient.get(
+            `county-covid-data-${countyFips}`
+        );
+        if (cachedData) {
+            // If data in local cache expired, re-cache data from redis to local cache
+            if (!hasCacheKey(`county-covid-data-${countyFips}`)) {
+                setCache(`county-covid-data-${countyFips}`, cachedData, ttl);
+            }
+
+            return {
+                data: cachedData,
+                length: cachedData.length,
+            };
+        }
+
         const response = await axios.get(API_URL);
 
         if (!response.data) {
@@ -19,7 +46,13 @@ export const getCountyMetric = async (countyFips: string) => {
             };
         }
 
-        console.log(response.data);
+        setCache(`county-covid-data-${countyFips}`, response.data, ttl);
+
+        await redisClient.set(
+            `county-covid-data-${countyFips}`,
+            JSON.stringify(response.data),
+            { ex: 600 }
+        );
 
         return {
             data: response.data,
