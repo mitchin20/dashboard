@@ -17,7 +17,6 @@ export const getCountyMetric = async (countyFips: string) => {
         if (localCacheData) {
             return {
                 data: localCacheData,
-                length: localCacheData.length,
             };
         }
 
@@ -26,14 +25,14 @@ export const getCountyMetric = async (countyFips: string) => {
             `county-covid-data-${countyFips}`
         );
         if (cachedData) {
+            const parsedData = JSON.parse(cachedData);
             // If data in local cache expired, re-cache data from redis to local cache
             if (!hasCacheKey(`county-covid-data-${countyFips}`)) {
-                setCache(`county-covid-data-${countyFips}`, cachedData, ttl);
+                setCache(`county-covid-data-${countyFips}`, parsedData, ttl);
             }
 
             return {
-                data: cachedData,
-                length: cachedData.length,
+                data: parsedData,
             };
         }
 
@@ -56,7 +55,6 @@ export const getCountyMetric = async (countyFips: string) => {
 
         return {
             data: response.data,
-            length: response.data.length,
         };
     } catch (error) {
         console.error("Fetch Count covid information error: ", error);
