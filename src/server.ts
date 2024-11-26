@@ -36,18 +36,26 @@ app.use(
 
 app.use(
     cors({
-        origin: (origin, callback) => {
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
+        origin: "*",
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
-        // credentials: true, // Allow cookies if needed
     })
 );
+
+// app.use(
+//     cors({
+//         origin: (origin, callback) => {
+//             if (!origin || allowedOrigins.includes(origin)) {
+//                 callback(null, true);
+//             } else {
+//                 callback(new Error("Not allowed by CORS"));
+//             }
+//         },
+//         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//         allowedHeaders: ["Content-Type", "Authorization"],
+//         // credentials: true, // Allow cookies if needed
+//     })
+// );
 
 app.get("/health", (req: Request, res: Response) => {
     res.status(200).send("Application is healthy!");
