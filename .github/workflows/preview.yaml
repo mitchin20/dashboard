@@ -1,4 +1,4 @@
-name: Vercel Preview Deployment
+name: Vercel Preview Deployment Dashboard-Server-1
 
 env:
     VERCEL_ORG_ID: ${{ secrets.VERCEL_TOKEN }}
