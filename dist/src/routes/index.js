@@ -12,12 +12,14 @@ const contactEmailController_1 = require("../controllers/contactEmailController"
 const getNpmPackagesController_1 = require("../controllers/getNpmPackagesController");
 const getMonthlyStateMetricsTimeseriesController_1 = require("../controllers/getMonthlyStateMetricsTimeseriesController");
 const getCountyMetricController_1 = require("../controllers/getCountyMetricController");
+const getEmployeesController_1 = require("../controllers/getEmployeesController");
 const router = express_1.default.Router();
 router.get("/all-us-states-covid-data", getCovidInfoController_1.getCovidInfoDataController);
 router.get("/state-metrics-timeseries/:state", getStateMetricsTimeseriesController_1.getStateMetricsTimeseriesController);
 router.get("/monthly-state-metrics-timeseries/:state", getMonthlyStateMetricsTimeseriesController_1.getMonthlyStateMetricsTimeseriesController);
 router.get("/download-resume", downloadResumeController_1.downloadResumeController);
 router.get("/county-metric/:fips", getCountyMetricController_1.getCountyMetricController);
+router.get("/employees", getEmployeesController_1.getEmployeesController);
 router.post("/bulk-upload", bulkUploadController_1.bulkUploadController);
 router.post("/contact-email", contactEmailController_1.contactEmailController);
 router.post("/get-npm-packages", getNpmPackagesController_1.getNpmPackagesController);

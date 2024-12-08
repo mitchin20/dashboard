@@ -7,6 +7,7 @@ import { contactEmailController } from "../controllers/contactEmailController";
 import { getNpmPackagesController } from "../controllers/getNpmPackagesController";
 import { getMonthlyStateMetricsTimeseriesController } from "../controllers/getMonthlyStateMetricsTimeseriesController";
 import { getCountyMetricController } from "../controllers/getCountyMetricController";
+import { getEmployeesController } from "../controllers/getEmployeesController";
 
 const router = express.Router();
 
@@ -21,6 +22,7 @@ router.get(
 );
 router.get("/download-resume", downloadResumeController);
 router.get("/county-metric/:fips", getCountyMetricController);
+router.get("/employees", getEmployeesController);
 
 router.post("/bulk-upload", bulkUploadController);
 router.post("/contact-email", contactEmailController);
