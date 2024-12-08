@@ -2,6 +2,7 @@ require("dotenv").config();
 import { executeQuery } from "../db/database";
 
 interface Employees {
+    id: number;
     firstName: string;
     lastName: string;
     fullName: string;
@@ -19,7 +20,9 @@ export const getEmployees = async () => {
 
         const result = await executeQuery(query);
 
-        return result.rows || [];
+        const employees: Employees[] = result.rows;
+
+        return employees;
     } catch (error) {
         if (error instanceof Error) console.error(error.message);
         throw error;
