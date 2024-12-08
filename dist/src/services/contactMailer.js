@@ -30,9 +30,9 @@ const transporter = nodemailer_1.default.createTransport({
 });
 const sendEmail = (name, email, message) => __awaiter(void 0, void 0, void 0, function* () {
     const mailOptions = {
-        from: process.env.EMAIL,
+        from: `Portfolio Contact <${process.env.DOMAIN_NAME}>`,
         to: process.env.TO_EMAIL,
-        replyTo: process.env.EMAIL,
+        replyTo: email,
         subject: `${name} is reaching through Personal Portfolio`,
         text: message,
         html: `

@@ -21,9 +21,9 @@ export const sendEmail = async (
     message: string
 ) => {
     const mailOptions = {
-        from: process.env.EMAIL,
+        from: `Portfolio Contact <${process.env.DOMAIN_NAME}>`,
         to: process.env.TO_EMAIL,
-        replyTo: process.env.EMAIL,
+        replyTo: email,
         subject: `${name} is reaching through Personal Portfolio`,
         text: message,
         html: `
