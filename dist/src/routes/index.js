@@ -13,6 +13,7 @@ const getNpmPackagesController_1 = require("../controllers/getNpmPackagesControl
 const getMonthlyStateMetricsTimeseriesController_1 = require("../controllers/getMonthlyStateMetricsTimeseriesController");
 const getCountyMetricController_1 = require("../controllers/getCountyMetricController");
 const getEmployeesController_1 = require("../controllers/getEmployeesController");
+const createEmployeeController_1 = require("../controllers/createEmployeeController");
 const router = express_1.default.Router();
 router.get("/all-us-states-covid-data", getCovidInfoController_1.getCovidInfoDataController);
 router.get("/state-metrics-timeseries/:state", getStateMetricsTimeseriesController_1.getStateMetricsTimeseriesController);
@@ -23,4 +24,5 @@ router.get("/employees", getEmployeesController_1.getEmployeesController);
 router.post("/bulk-upload", bulkUploadController_1.bulkUploadController);
 router.post("/contact-email", contactEmailController_1.contactEmailController);
 router.post("/get-npm-packages", getNpmPackagesController_1.getNpmPackagesController);
+router.post("/create-employee", createEmployeeController_1.createEmployeeController);
 exports.default = router;

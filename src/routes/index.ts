@@ -8,6 +8,7 @@ import { getNpmPackagesController } from "../controllers/getNpmPackagesControlle
 import { getMonthlyStateMetricsTimeseriesController } from "../controllers/getMonthlyStateMetricsTimeseriesController";
 import { getCountyMetricController } from "../controllers/getCountyMetricController";
 import { getEmployeesController } from "../controllers/getEmployeesController";
+import { createEmployeeController } from "../controllers/createEmployeeController";
 
 const router = express.Router();
 
@@ -27,5 +28,6 @@ router.get("/employees", getEmployeesController);
 router.post("/bulk-upload", bulkUploadController);
 router.post("/contact-email", contactEmailController);
 router.post("/get-npm-packages", getNpmPackagesController);
+router.post("/create-employee", createEmployeeController);
 
 export default router;
