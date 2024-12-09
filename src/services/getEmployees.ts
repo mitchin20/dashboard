@@ -1,7 +1,7 @@
 require("dotenv").config();
 import { executeQuery } from "../db/database";
 
-interface Employees {
+type Employees = {
     id: number;
     firstName: string;
     lastName: string;
@@ -9,7 +9,7 @@ interface Employees {
     color: string;
     phone: string;
     email: string;
-}
+};
 
 export const getEmployees = async () => {
     try {
