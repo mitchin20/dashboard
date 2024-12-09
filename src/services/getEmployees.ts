@@ -22,8 +22,6 @@ export const getEmployees = async () => {
 
         const employees: Employees[] = result.rows;
 
-        console.log("employees: ", employees);
-
         return employees;
     } catch (error) {
         if (error instanceof Error) console.error(error.message);
