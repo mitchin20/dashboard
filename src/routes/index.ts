@@ -9,6 +9,7 @@ import { getMonthlyStateMetricsTimeseriesController } from "../controllers/getMo
 import { getCountyMetricController } from "../controllers/getCountyMetricController";
 import { getEmployeesController } from "../controllers/getEmployeesController";
 import { createEmployeeController } from "../controllers/createEmployeeController";
+import { updateEmployeeController } from "../controllers/updateEmployeeController";
 
 const router = express.Router();
 
@@ -23,11 +24,14 @@ router.get(
 );
 router.get("/download-resume", downloadResumeController);
 router.get("/county-metric/:fips", getCountyMetricController);
-router.get("/employees", getEmployeesController);
 
 router.post("/bulk-upload", bulkUploadController);
 router.post("/contact-email", contactEmailController);
 router.post("/get-npm-packages", getNpmPackagesController);
+
+// employee routes
+router.get("/employees", getEmployeesController);
+router.put("/update-employee/:id", updateEmployeeController);
 router.post("/create-employee", createEmployeeController);
 
 export default router;
