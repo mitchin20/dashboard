@@ -13,7 +13,7 @@ export const updateEmployee = async (employeeId: number, data: Employee) => {
         // Check if the employee exists
         const checkValues = [employeeId];
         const checkQuery = `
-            SELECT * FROM "Employee" WHERE "employeeId" = $1;
+            SELECT * FROM "Employee" WHERE "id" = $1;
         `;
 
         const existingResult = await executeQuery(checkQuery, checkValues);
@@ -37,7 +37,7 @@ export const updateEmployee = async (employeeId: number, data: Employee) => {
         const query = `
             UPDATE "Employee"
             SET "firstName" = $1, "lastName" = $2, "fullName" = $3, "color" = $4, "email" = $5, "phone" = $6
-            WHERE "employeeId" = $7
+            WHERE "id" = $7
             RETURNING *;
         `;
 
