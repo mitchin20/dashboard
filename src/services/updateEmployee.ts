@@ -1,4 +1,5 @@
 import { executeQuery } from "../db/database";
+import { getEmployee } from "./getEmployee";
 
 type Employee = {
     firstName: string;
@@ -11,12 +12,7 @@ type Employee = {
 export const updateEmployee = async (employeeId: number, data: Employee) => {
     try {
         // Check if the employee exists
-        const checkValues = [employeeId];
-        const checkQuery = `
-            SELECT * FROM "Employee" WHERE "id" = $1;
-        `;
-
-        const existingResult = await executeQuery(checkQuery, checkValues);
+        const existingResult = await getEmployee(employeeId);
 
         if (!existingResult || existingResult.rows.length === 0) {
             return null;

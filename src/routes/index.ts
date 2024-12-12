@@ -10,6 +10,7 @@ import { getCountyMetricController } from "../controllers/getCountyMetricControl
 import { getEmployeesController } from "../controllers/getEmployeesController";
 import { createEmployeeController } from "../controllers/createEmployeeController";
 import { updateEmployeeController } from "../controllers/updateEmployeeController";
+import { deleteEmployeeController } from "../controllers/deleteEmployeeController";
 
 const router = express.Router();
 
@@ -33,5 +34,6 @@ router.post("/get-npm-packages", getNpmPackagesController);
 router.get("/employees", getEmployeesController);
 router.put("/update-employee/:id", updateEmployeeController);
 router.post("/create-employee", createEmployeeController);
+router.delete("/delete-employee/:id", deleteEmployeeController);
 
 export default router;

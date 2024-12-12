@@ -9,38 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateEmployee = void 0;
+exports.getEmployee = void 0;
 const database_1 = require("../db/database");
-const getEmployee_1 = require("./getEmployee");
-const updateEmployee = (employeeId, data) => __awaiter(void 0, void 0, void 0, function* () {
+const getEmployee = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Check if the employee exists
-        const existingResult = yield (0, getEmployee_1.getEmployee)(employeeId);
-        if (!existingResult || existingResult.rows.length === 0) {
-            return null;
-        }
-        const fullName = `${data.firstName} ${data.lastName}`;
-        const values = [
-            data.firstName,
-            data.lastName,
-            fullName,
-            data.color,
-            data.email,
-            data.phone,
-            employeeId,
-        ];
+        const values = [id];
         const query = `
-            UPDATE "Employee"
-            SET "firstName" = $1, "lastName" = $2, "fullName" = $3, "color" = $4, "email" = $5, "phone" = $6
-            WHERE "id" = $7
-            RETURNING *;
+            SELECT * FROM "Employee" WHERE "id" = $1;
         `;
         const result = yield (0, database_1.executeQuery)(query, values);
         return result.rows[0];
     }
     catch (error) {
-        console.error("Error updating employee:", error);
+        console.error("Error fetching employee:", error);
         throw error;
     }
 });
-exports.updateEmployee = updateEmployee;
+exports.getEmployee = getEmployee;

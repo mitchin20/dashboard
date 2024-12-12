@@ -15,6 +15,7 @@ const getCountyMetricController_1 = require("../controllers/getCountyMetricContr
 const getEmployeesController_1 = require("../controllers/getEmployeesController");
 const createEmployeeController_1 = require("../controllers/createEmployeeController");
 const updateEmployeeController_1 = require("../controllers/updateEmployeeController");
+const deleteEmployeeController_1 = require("../controllers/deleteEmployeeController");
 const router = express_1.default.Router();
 router.get("/all-us-states-covid-data", getCovidInfoController_1.getCovidInfoDataController);
 router.get("/state-metrics-timeseries/:state", getStateMetricsTimeseriesController_1.getStateMetricsTimeseriesController);
@@ -28,4 +29,5 @@ router.post("/get-npm-packages", getNpmPackagesController_1.getNpmPackagesContro
 router.get("/employees", getEmployeesController_1.getEmployeesController);
 router.put("/update-employee/:id", updateEmployeeController_1.updateEmployeeController);
 router.post("/create-employee", createEmployeeController_1.createEmployeeController);
+router.delete("/delete-employee/:id", deleteEmployeeController_1.deleteEmployeeController);
 exports.default = router;
