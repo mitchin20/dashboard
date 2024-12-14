@@ -13,7 +13,7 @@ export const deleteService = async (serviceId: number) => {
 
         const values = [serviceId];
         const query = `
-            DELETE FROM "Service"
+            DELETE FROM "service"
             WHERE "id" = $1
             RETURNING *;
         `;

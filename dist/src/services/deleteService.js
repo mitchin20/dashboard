@@ -22,7 +22,7 @@ const deleteService = (serviceId) => __awaiter(void 0, void 0, void 0, function*
         }
         const values = [serviceId];
         const query = `
-            DELETE FROM "Service"
+            DELETE FROM "service"
             WHERE "id" = $1
             RETURNING *;
         `;
