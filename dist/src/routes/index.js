@@ -16,6 +16,10 @@ const getEmployeesController_1 = require("../controllers/getEmployeesController"
 const createEmployeeController_1 = require("../controllers/createEmployeeController");
 const updateEmployeeController_1 = require("../controllers/updateEmployeeController");
 const deleteEmployeeController_1 = require("../controllers/deleteEmployeeController");
+const getServicesController_1 = require("../controllers/getServicesController");
+const updateServiceController_1 = require("../controllers/updateServiceController");
+const createServiceController_1 = require("../controllers/createServiceController");
+const deleteServiceController_1 = require("../controllers/deleteServiceController");
 const router = express_1.default.Router();
 router.get("/all-us-states-covid-data", getCovidInfoController_1.getCovidInfoDataController);
 router.get("/state-metrics-timeseries/:state", getStateMetricsTimeseriesController_1.getStateMetricsTimeseriesController);
@@ -30,4 +34,9 @@ router.get("/employees", getEmployeesController_1.getEmployeesController);
 router.put("/update-employee/:id", updateEmployeeController_1.updateEmployeeController);
 router.post("/create-employee", createEmployeeController_1.createEmployeeController);
 router.delete("/delete-employee/:id", deleteEmployeeController_1.deleteEmployeeController);
+// service routes
+router.get("/services", getServicesController_1.getServicesController);
+router.put("/update-service/:id", updateServiceController_1.updateServiceController);
+router.post("/create-service", createServiceController_1.createServiceController);
+router.delete("/delete-service/:id", deleteServiceController_1.deleteServiceController);
 exports.default = router;

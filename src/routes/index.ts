@@ -11,6 +11,10 @@ import { getEmployeesController } from "../controllers/getEmployeesController";
 import { createEmployeeController } from "../controllers/createEmployeeController";
 import { updateEmployeeController } from "../controllers/updateEmployeeController";
 import { deleteEmployeeController } from "../controllers/deleteEmployeeController";
+import { getServicesController } from "../controllers/getServicesController";
+import { updateServiceController } from "../controllers/updateServiceController";
+import { createServiceController } from "../controllers/createServiceController";
+import { deleteServiceController } from "../controllers/deleteServiceController";
 
 const router = express.Router();
 
@@ -35,5 +39,11 @@ router.get("/employees", getEmployeesController);
 router.put("/update-employee/:id", updateEmployeeController);
 router.post("/create-employee", createEmployeeController);
 router.delete("/delete-employee/:id", deleteEmployeeController);
+
+// service routes
+router.get("/services", getServicesController);
+router.put("/update-service/:id", updateServiceController);
+router.post("/create-service", createServiceController);
+router.delete("/delete-service/:id", deleteServiceController);
 
 export default router;
