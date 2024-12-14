@@ -17,7 +17,7 @@ const deleteService = (serviceId) => __awaiter(void 0, void 0, void 0, function*
     try {
         // Check if the service exists
         const existingResult = yield (0, getService_1.getService)(serviceId);
-        if (!existingResult || existingResult.rows.length === 0) {
+        if (!existingResult) {
             return null;
         }
         const values = [serviceId];

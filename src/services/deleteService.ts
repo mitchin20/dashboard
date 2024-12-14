@@ -7,7 +7,7 @@ export const deleteService = async (serviceId: number) => {
         // Check if the service exists
         const existingResult = await getService(serviceId);
 
-        if (!existingResult || existingResult.rows.length === 0) {
+        if (!existingResult) {
             return null;
         }
 
