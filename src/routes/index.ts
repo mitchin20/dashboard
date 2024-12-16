@@ -15,6 +15,10 @@ import { getServicesController } from "../controllers/getServicesController";
 import { updateServiceController } from "../controllers/updateServiceController";
 import { createServiceController } from "../controllers/createServiceController";
 import { deleteServiceController } from "../controllers/deleteServiceController";
+import { createCategoryController } from "../controllers/createCategoryController";
+import { updateCategoryController } from "../controllers/updateCategoryController";
+import { getCategoriesController } from "../controllers/getCategoriesController";
+import { deleteCategoryController } from "../controllers/deleteCategoryController";
 
 const router = express.Router();
 
@@ -45,5 +49,11 @@ router.get("/services", getServicesController);
 router.put("/update-service/:id", updateServiceController);
 router.post("/create-service", createServiceController);
 router.delete("/delete-service/:id", deleteServiceController);
+
+// category routes
+router.get("/categories", getCategoriesController);
+router.put("/update-category/:id", updateCategoryController);
+router.post("/create-category", createCategoryController);
+router.delete("/delete-category/:id", deleteCategoryController);
 
 export default router;
