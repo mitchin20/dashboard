@@ -6,6 +6,7 @@ type Service = {
     category: string;
     name: string;
     price: number;
+    categoryId: number;
 };
 
 export const updateService = async (serviceId: number, data: Service) => {
@@ -16,12 +17,18 @@ export const updateService = async (serviceId: number, data: Service) => {
             return null;
         }
 
-        const values = [data.category, data.name, data.price, serviceId];
+        const values = [
+            data.category,
+            data.categoryId,
+            data.name,
+            data.price,
+            serviceId,
+        ];
 
         const query = `
             UPDATE "service"
-            SET "category" = $1, "name" = $2, "price" = $3
-            WHERE "id" = $4
+            SET "category" = $1, "category_id" = $2, "name" = $3, "price" = $4
+            WHERE "id" = $5
             RETURNING *;
         `;
 

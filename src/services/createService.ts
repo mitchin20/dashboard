@@ -3,10 +3,10 @@ import { executeQuery } from "../db/database";
 
 export const createService = async (data: any) => {
     try {
-        const values = [data.category, data.name, data.price];
+        const values = [data.category, data.name, data.price, data.categoryId];
         const query = `
-            INSERT INTO "service" ("category", "name", "price")
-            VALUES ($1, $2, $3)
+            INSERT INTO "service" ("category", "name", "price", "category_id")
+            VALUES ($1, $2, $3, $4)
             RETURNING *;
         `;
 

@@ -6,6 +6,7 @@ const serviceSchema = yup.object().shape({
     category: yup.string().required(),
     name: yup.string().required(),
     price: yup.number().required(),
+    categoryId: yup.number().required(),
 });
 
 export const createServiceController = async (req: Request, res: Response) => {

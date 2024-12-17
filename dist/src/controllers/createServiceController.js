@@ -39,6 +39,7 @@ const serviceSchema = yup.object().shape({
     category: yup.string().required(),
     name: yup.string().required(),
     price: yup.number().required(),
+    categoryId: yup.number().required(),
 });
 const createServiceController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

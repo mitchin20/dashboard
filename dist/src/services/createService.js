@@ -14,10 +14,10 @@ require("dotenv").config();
 const database_1 = require("../db/database");
 const createService = (data) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const values = [data.category, data.name, data.price];
+        const values = [data.category, data.name, data.price, data.categoryId];
         const query = `
-            INSERT INTO "service" ("category", "name", "price")
-            VALUES ($1, $2, $3)
+            INSERT INTO "service" ("category", "name", "price", "category_id")
+            VALUES ($1, $2, $3, $4)
             RETURNING *;
         `;
         const result = yield (0, database_1.executeQuery)(query, values);

@@ -6,6 +6,7 @@ type Service = {
     category: string;
     name: string;
     price: number;
+    categoryId: number;
 };
 
 export const getServices = async () => {

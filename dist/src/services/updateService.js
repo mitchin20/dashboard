@@ -19,11 +19,17 @@ const updateService = (serviceId, data) => __awaiter(void 0, void 0, void 0, fun
         if (!existingService || existingService.rows.length === 0) {
             return null;
         }
-        const values = [data.category, data.name, data.price, serviceId];
+        const values = [
+            data.category,
+            data.categoryId,
+            data.name,
+            data.price,
+            serviceId,
+        ];
         const query = `
             UPDATE "service"
-            SET "category" = $1, "name" = $2, "price" = $3
-            WHERE "id" = $4
+            SET "category" = $1, "category_id" = $2, "name" = $3, "price" = $4
+            WHERE "id" = $5
             RETURNING *;
         `;
         const result = yield (0, database_1.executeQuery)(query, values);
