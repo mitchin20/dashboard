@@ -16,7 +16,7 @@ const createService = (data) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const values = [data.category, data.name, data.price, data.categoryId];
         const query = `
-            INSERT INTO "service" ("category", "name", "price", "category_id")
+            INSERT INTO "service" ("category", "name", "price", "categoryId")
             VALUES ($1, $2, $3, $4)
             RETURNING *;
         `;

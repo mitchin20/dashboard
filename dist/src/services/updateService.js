@@ -28,7 +28,7 @@ const updateService = (serviceId, data) => __awaiter(void 0, void 0, void 0, fun
         ];
         const query = `
             UPDATE "service"
-            SET "category" = $1, "category_id" = $2, "name" = $3, "price" = $4
+            SET "category" = $1, "categoryId" = $2, "name" = $3, "price" = $4
             WHERE "id" = $5
             RETURNING *;
         `;
