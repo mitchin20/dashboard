@@ -15,7 +15,7 @@ export const updateEmployee = async (employeeId: number, data: Employee) => {
         // Check if the employee exists
         const existingResult = await getEmployee(employeeId);
 
-        if (!existingResult || existingResult.rows.length === 0) {
+        if (!existingResult) {
             return null;
         }
 

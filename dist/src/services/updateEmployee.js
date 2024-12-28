@@ -16,7 +16,7 @@ const updateEmployee = (employeeId, data) => __awaiter(void 0, void 0, void 0, f
     try {
         // Check if the employee exists
         const existingResult = yield (0, getEmployee_1.getEmployee)(employeeId);
-        if (!existingResult || existingResult.rows.length === 0) {
+        if (!existingResult) {
             return null;
         }
         const fullName = `${data.firstName} ${data.lastName}`;
