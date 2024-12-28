@@ -27,12 +27,13 @@ const updateEmployee = (employeeId, data) => __awaiter(void 0, void 0, void 0, f
             data.color,
             data.email,
             data.phone,
+            data.employeeType,
             employeeId,
         ];
         const query = `
             UPDATE "Employee"
-            SET "firstName" = $1, "lastName" = $2, "fullName" = $3, "color" = $4, "email" = $5, "phone" = $6
-            WHERE "id" = $7
+            SET "firstName" = $1, "lastName" = $2, "fullName" = $3, "color" = $4, "email" = $5, "phone" = $6, "employeeType" = $7
+            WHERE "id" = $8
             RETURNING *;
         `;
         const result = yield (0, database_1.executeQuery)(query, values);

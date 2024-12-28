@@ -7,6 +7,7 @@ type Employee = {
     color: string;
     email: string;
     phone: string;
+    employeeType: string;
 };
 
 export const updateEmployee = async (employeeId: number, data: Employee) => {
@@ -27,13 +28,14 @@ export const updateEmployee = async (employeeId: number, data: Employee) => {
             data.color,
             data.email,
             data.phone,
+            data.employeeType,
             employeeId,
         ];
 
         const query = `
             UPDATE "Employee"
-            SET "firstName" = $1, "lastName" = $2, "fullName" = $3, "color" = $4, "email" = $5, "phone" = $6
-            WHERE "id" = $7
+            SET "firstName" = $1, "lastName" = $2, "fullName" = $3, "color" = $4, "email" = $5, "phone" = $6, "employeeType" = $7
+            WHERE "id" = $8
             RETURNING *;
         `;
 

@@ -41,6 +41,7 @@ const employeeSchema = yup.object().shape({
     color: yup.string().required(),
     email: yup.string().email().required(),
     phone: yup.string().required(),
+    employeeType: yup.string().required(),
 });
 const createEmployeeController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -58,7 +59,8 @@ const createEmployeeController = (req, res) => __awaiter(void 0, void 0, void 0,
             !data.lastName ||
             !data.color ||
             !data.email ||
-            !data.phone) {
+            !data.phone ||
+            !data.employeeType) {
             res.status(400).json({
                 success: false,
                 data: null,

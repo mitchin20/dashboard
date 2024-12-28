@@ -21,10 +21,11 @@ const createEmployee = (data) => __awaiter(void 0, void 0, void 0, function* () 
             data.color,
             data.email,
             data.phone,
+            data.employeeType,
         ];
         const query = `
-            INSERT INTO "Employee" ("firstName", "lastName", "fullName", "color", "email", "phone")
-            VALUES ($1, $2, $3, $4, $5, $6)
+            INSERT INTO "Employee" ("firstName", "lastName", "fullName", "color", "email", "phone", "employeeType")
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *;
         `;
         const result = yield (0, database_1.executeQuery)(query, values);

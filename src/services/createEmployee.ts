@@ -6,6 +6,7 @@ type Employee = {
     color: string;
     email: string;
     phone: string;
+    employeeType: string;
 };
 
 export const createEmployee = async (data: Employee) => {
@@ -19,11 +20,12 @@ export const createEmployee = async (data: Employee) => {
             data.color,
             data.email,
             data.phone,
+            data.employeeType,
         ];
 
         const query = `
-            INSERT INTO "Employee" ("firstName", "lastName", "fullName", "color", "email", "phone")
-            VALUES ($1, $2, $3, $4, $5, $6)
+            INSERT INTO "Employee" ("firstName", "lastName", "fullName", "color", "email", "phone", "employeeType")
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *;
         `;
 

@@ -8,6 +8,7 @@ const employeeSchema = yup.object().shape({
     color: yup.string().required(),
     email: yup.string().email().required(),
     phone: yup.string().required(),
+    employeeType: yup.string().required(),
 });
 
 export const createEmployeeController = async (req: Request, res: Response) => {
@@ -29,7 +30,8 @@ export const createEmployeeController = async (req: Request, res: Response) => {
             !data.lastName ||
             !data.color ||
             !data.email ||
-            !data.phone
+            !data.phone ||
+            !data.employeeType
         ) {
             res.status(400).json({
                 success: false,

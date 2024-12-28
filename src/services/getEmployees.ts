@@ -9,6 +9,7 @@ type Employees = {
     color: string;
     phone: string;
     email: string;
+    employeeType: string;
 };
 
 export const getEmployees = async () => {
